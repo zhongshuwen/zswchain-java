@@ -19,6 +19,12 @@ public class CryptoHelper {
         if(key.startsWith("PUB_R1_"))
         {
             return StringToKey(key.substring(7), PUB_KEY_DATA_SIZE, "R1");
+        }else if(key.startsWith("PUB_K1_"))
+        {
+            return StringToKey(key.substring(7), PUB_KEY_DATA_SIZE, "K1");
+        }else if(key.startsWith("PUB_GM_"))
+        {
+            return StringToKey(key.substring(7), PUB_KEY_DATA_SIZE, "GM");
         }
         else if(key.startsWith(prefix))
         {
@@ -33,6 +39,14 @@ public class CryptoHelper {
     public static byte[] PubKeyStringToBytes(String key) throws Exception {
         return PubKeyStringToBytes(key, "EOS");
     }
+    public static byte[] PubKeyStringToBytesNoChecksum(String key) throws Exception
+    {
+        byte[] result = PubKeyStringToBytes(key);
+
+        byte[] output = new byte[result.length-4];
+        System.arraycopy(result,0,output, 0, output.length);
+        return output;
+    }
     /// <summary>
     /// Convert encoded public key to byte array
     /// </summary>
@@ -43,8 +57,20 @@ public class CryptoHelper {
     {
         if (key.startsWith("PVT_R1_"))
             return StringToKey(key.substring(7), PRIV_KEY_DATA_SIZE, "R1");
+        else if (key.startsWith("PVT_K1_"))
+            return StringToKey(key.substring(7), PRIV_KEY_DATA_SIZE, "K1");
+        else if (key.startsWith("PVT_GM_"))
+            return StringToKey(key.substring(7), PRIV_KEY_DATA_SIZE, "GM");
         else
             return StringToKey(key, PRIV_KEY_DATA_SIZE, "sha256x2");
+    }
+    public static byte[] PrivKeyStringToBytesNoChecksum(String key) throws Exception
+    {
+        byte[] result = PrivKeyStringToBytes(key);
+
+        byte[] output = new byte[result.length-4];
+        System.arraycopy(result,0,output, 0, output.length);
+        return output;
     }
 
     /// <summary>

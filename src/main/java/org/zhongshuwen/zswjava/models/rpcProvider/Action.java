@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSerializer;
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
@@ -77,13 +78,13 @@ public class Action implements Serializable {
         this.isContextFree = isContextFree;
     }
     public static Action fromSerializable(@NotNull String account, @NotNull String name,
-                                          @NotNull List<Authorization> authorization, @NotNull Serializable data){
+                                          @NotNull Authorization[] authorization, @NotNull Serializable data){
         if(gson == null){
             gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'hh:mm:ss zzz")
                     .disableHtmlEscaping().create();
         }
         String jsonData =gson.toJson(data);
-        return new Action(account, name, authorization, jsonData);
+        return new Action(account, name, Arrays.asList(authorization), jsonData);
 
     }
     public Action(@NotNull String account, @NotNull String name,

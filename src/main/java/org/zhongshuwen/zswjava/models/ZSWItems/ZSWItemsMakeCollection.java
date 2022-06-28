@@ -2,6 +2,7 @@ package org.zhongshuwen.zswjava.models.ZSWItems;
 
 import com.google.gson.annotations.SerializedName;
 import org.jetbrains.annotations.NotNull;
+import org.zhongshuwen.zswjava.abitypes.ZSWAPIV1;
 
 import java.io.Serializable;
 /*
@@ -31,7 +32,7 @@ import java.io.Serializable;
       ],
       "external_metadata_url": "https://example.com/collection.json"
  */
-public class ZSWItemsMakeCollection {
+public class ZSWItemsMakeCollection implements  Serializable{
 
 
     @SerializedName("authorizer")
@@ -62,7 +63,7 @@ public class ZSWItemsMakeCollection {
 
     @SerializedName("item_config")
     @NotNull
-    public String item_config;
+    public int item_config;
 
 
     @SerializedName("secondary_market_fee")
@@ -80,6 +81,9 @@ public class ZSWItemsMakeCollection {
     @SerializedName("max_items")
     @NotNull
     public long max_items;
+    @SerializedName("max_supply")
+    @NotNull
+    public long max_supply;
 
     @SerializedName("max_supply_per_item")
     @NotNull
@@ -103,12 +107,32 @@ public class ZSWItemsMakeCollection {
 
     @SerializedName("metadata")
     @NotNull
-    public ZSWItemsSchemaFieldValue[] metadata;
+    public ZSWAPIV1.KVPair[] metadata;
 
 
     @SerializedName("external_metadata_url")
     @NotNull
     public String external_metadata_url;
 
-
+    public ZSWItemsMakeCollection(@NotNull String authorizer, @NotNull String zsw_id, @NotNull String collection_id, @NotNull int collection_type, @NotNull String creator, @NotNull String issuing_platform, @NotNull int item_config, @NotNull int secondary_market_fee, @NotNull int primary_market_fee, @NotNull String royalty_fee_collector, @NotNull long max_items, @NotNull long max_supply, @NotNull long max_supply_per_item, @NotNull String schema_name, @NotNull String[] authorized_minters, @NotNull String[] notify_accounts, @NotNull String[] authorized_mutable_data_editors, @NotNull ZSWAPIV1.KVPair[] metadata, @NotNull String external_metadata_url) {
+        this.authorizer = authorizer;
+        this.zsw_id = zsw_id;
+        this.collection_id = collection_id;
+        this.collection_type = collection_type;
+        this.creator = creator;
+        this.issuing_platform = issuing_platform;
+        this.item_config = item_config;
+        this.secondary_market_fee = secondary_market_fee;
+        this.primary_market_fee = primary_market_fee;
+        this.royalty_fee_collector = royalty_fee_collector;
+        this.max_items = max_items;
+        this.max_supply = max_supply;
+        this.max_supply_per_item = max_supply_per_item;
+        this.schema_name = schema_name;
+        this.authorized_minters = authorized_minters;
+        this.notify_accounts = notify_accounts;
+        this.authorized_mutable_data_editors = authorized_mutable_data_editors;
+        this.metadata = metadata;
+        this.external_metadata_url = external_metadata_url;
+    }
 }

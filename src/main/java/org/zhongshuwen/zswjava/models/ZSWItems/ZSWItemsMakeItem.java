@@ -2,6 +2,7 @@ package org.zhongshuwen.zswjava.models.ZSWItems;
 
 import com.google.gson.annotations.SerializedName;
 import org.jetbrains.annotations.NotNull;
+import org.zhongshuwen.zswjava.abitypes.ZSWAPIV1;
 
 import java.io.Serializable;
 /*
@@ -34,7 +35,7 @@ import java.io.Serializable;
     }
   },
  */
-public class ZSWItemsMakeItem {
+public class ZSWItemsMakeItem implements  Serializable{
 
 
     @SerializedName("authorizer")
@@ -63,7 +64,7 @@ public class ZSWItemsMakeItem {
 
     @SerializedName("max_supply")
     @NotNull
-    public String max_supply;
+    public long max_supply;
 
 
     @SerializedName("schema_name")
@@ -73,13 +74,13 @@ public class ZSWItemsMakeItem {
 
     @SerializedName("immutable_metadata")
     @NotNull
-    public ZSWItemsSchemaFieldValue[] immutable_metadata;
+    public ZSWAPIV1.KVPair[] immutable_metadata;
     @SerializedName("mutable_metadata")
     @NotNull
-    public ZSWItemsSchemaFieldValue[] mutable_metadata;
+    public ZSWAPIV1.KVPair[] mutable_metadata;
 
 
-    public ZSWItemsMakeItem(@NotNull String authorizer, @NotNull String authorized_minter, @NotNull String item_id, @NotNull String zsw_id, @NotNull int item_config, @NotNull String item_template_id, @NotNull String max_supply, @NotNull String schema_name, @NotNull ZSWItemsSchemaFieldValue[] immutable_metadata, @NotNull ZSWItemsSchemaFieldValue[] mutable_metadata) {
+    public ZSWItemsMakeItem(@NotNull String authorizer, @NotNull String authorized_minter, @NotNull String item_id, @NotNull String zsw_id, @NotNull int item_config, @NotNull String item_template_id, @NotNull long max_supply, @NotNull String schema_name, @NotNull ZSWAPIV1.KVPair[] immutable_metadata, @NotNull ZSWAPIV1.KVPair[] mutable_metadata) {
         this.authorizer = authorizer;
         this.authorized_minter = authorized_minter;
         this.item_id = item_id;

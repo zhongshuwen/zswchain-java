@@ -54,6 +54,19 @@ public class ZSWStreamSerializers {
             return Long.parseLong(value+"");
         }
     }
+    public static long getUnsignedLongVersion(Object value){
+        if(value instanceof Double){
+            return ((Double) value).longValue();
+        }else if(value instanceof String) {
+            return Long.parseUnsignedLong((String)value);
+        }else if(value instanceof Long) {
+            return (Long) value;
+        }else if(value instanceof Integer) {
+            return ((Integer) value).longValue();
+        }else{
+            return Long.parseUnsignedLong(value+"");
+        }
+    }
     public static long getIntVersion(Object value){
         if(value instanceof Double){
             return ((Double) value).intValue();
@@ -134,7 +147,7 @@ public class ZSWStreamSerializers {
                 new WriteDelegate() {
                     @Override
                     public void Write(ZSWWriteStream writeStream, Object data) {
-                        writeStream.WriteUint32(getLongVersion(data));//(int)getIntVersion(data));
+                        writeStream.WriteUint32(getUnsignedLongVersion(data));//(int)getIntVersion(data));
                     }
                 }
         );
@@ -156,7 +169,7 @@ public class ZSWStreamSerializers {
                 new WriteDelegate() {
                     @Override
                     public void Write(ZSWWriteStream writeStream, Object data) throws Exception {
-                        writeStream.WriteUint64((long)getLongVersion(data));
+                        writeStream.WriteUint64((long)getUnsignedLongVersion(data));
                     }
                 }
         );
@@ -178,7 +191,20 @@ public class ZSWStreamSerializers {
                 new WriteDelegate() {
                     @Override
                     public void Write(ZSWWriteStream writeStream, Object data) throws Exception {
-                        writeStream.WriteUInt128(new BigInteger((String)data));
+                         /*if(data instanceof String){
+
+                        }else if(data instanceof Double || data instanceof Float || data instanceof Integer || data instanceof BigInteger){
+
+                        }else if(data instanceof Float){
+
+                        }*/
+                        if(data instanceof Double){
+
+                            writeStream.WriteUInt128(new BigInteger(((Double)data).longValue()+""));
+
+                        }else {
+                            writeStream.WriteUInt128(new BigInteger(data + ""));
+                        }
                     }
                 }
         );
@@ -189,7 +215,7 @@ public class ZSWStreamSerializers {
                 new WriteDelegate() {
                     @Override
                     public void Write(ZSWWriteStream writeStream, Object data) {
-                        writeStream.WriteVarUint32(getLongVersion(data));
+                        writeStream.WriteVarUint32(getUnsignedLongVersion(data));
                     }
                 }
         );

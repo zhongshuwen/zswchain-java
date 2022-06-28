@@ -648,6 +648,8 @@ public class ZSWFormatter {
         return eosFormattedSignature;
     }
 
+
+
     /**
      * This method converts a PEM formatted private key to the ZSW format.
      *

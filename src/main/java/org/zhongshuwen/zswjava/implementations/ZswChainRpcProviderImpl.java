@@ -11,12 +11,7 @@ import org.zhongshuwen.zswjava.error.rpcProvider.GetRequiredKeysRpcError;
 import org.zhongshuwen.zswjava.error.rpcProvider.PushTransactionRpcError;
 import org.zhongshuwen.zswjava.error.rpcProvider.RpcProviderError;
 import org.zhongshuwen.zswjava.error.rpcProvider.SendTransactionRpcError;
-import org.zhongshuwen.zswjava.models.rpcProvider.request.GetBlockInfoRequest;
-import org.zhongshuwen.zswjava.models.rpcProvider.request.GetBlockRequest;
-import org.zhongshuwen.zswjava.models.rpcProvider.request.GetRawAbiRequest;
-import org.zhongshuwen.zswjava.models.rpcProvider.request.GetRequiredKeysRequest;
-import org.zhongshuwen.zswjava.models.rpcProvider.request.PushTransactionRequest;
-import org.zhongshuwen.zswjava.models.rpcProvider.request.SendTransactionRequest;
+import org.zhongshuwen.zswjava.models.rpcProvider.request.*;
 import org.zhongshuwen.zswjava.models.rpcProvider.response.GetBlockInfoResponse;
 import org.zhongshuwen.zswjava.models.rpcProvider.response.GetBlockResponse;
 import org.zhongshuwen.zswjava.models.rpcProvider.response.GetInfoResponse;
@@ -206,6 +201,22 @@ public class ZswChainRpcProviderImpl implements IRPCProviderExtended {
         }
     }
 
+    /**
+     * Issue a getTableRows() call to the blockchain and process the response.
+     * @param requestBody request body of get_table_rows API
+     * @return String content of ResponseBody on successful return.
+     * @throws RpcProviderError Thrown if any errors occur calling or processing the request.
+     */
+    public @NotNull String getTableRows(GetTableRowsRequest requestBody) throws RpcProviderError {
+        try {
+            Call<ResponseBody> syncCall = this.rpcProviderApi.getTableRows(requestBody);
+            try(ResponseBody responseBody = processCall(syncCall)) {
+                return responseBody.string();
+            }
+        } catch (Exception ex) {
+            throw new RpcProviderError(ZswChainJavaRpcErrorConstants.RPC_PROVIDER_ERROR_GET_TABLE_ROWS, ex);
+        }
+    }
     /**
      * Issue a getRequiredKeys() request to the blockchain and process the response.
      * @param getRequiredKeysRequest Info to get required keys
@@ -414,22 +425,6 @@ public class ZswChainRpcProviderImpl implements IRPCProviderExtended {
         }
     }
 
-    /**
-     * Issue a getTableRows() call to the blockchain and process the response.
-     * @param requestBody request body of get_table_rows API
-     * @return String content of ResponseBody on successful return.
-     * @throws RpcProviderError Thrown if any errors occur calling or processing the request.
-     */
-    public @NotNull String getTableRows(RequestBody requestBody) throws RpcProviderError {
-        try {
-            Call<ResponseBody> syncCall = this.rpcProviderApi.getTableRows(requestBody);
-            try(ResponseBody responseBody = processCall(syncCall)) {
-                return responseBody.string();
-            }
-        } catch (Exception ex) {
-            throw new RpcProviderError(ZswChainJavaRpcErrorConstants.RPC_PROVIDER_ERROR_GET_TABLE_ROWS, ex);
-        }
-    }
 
     /**
      * Issue a getKvTableRows() call to the blockchain and process the response.

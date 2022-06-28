@@ -413,22 +413,42 @@ public byte[] SerializeStruct(Object base, String structTypeName, ZSWAPIV1.Abi a
 
 
     private void WriteAbiVariant(ZSWWriteStream ws, Object value, ZSWAPIV1.Variant abiVariant, ZSWAPIV1.Abi abi, boolean isBinaryExtensionAllowed) throws SerializeError {
-        ZSWAPIV1.KVPair<String,Object> variantValue = (ZSWAPIV1.KVPair<String,Object>)value;
-        int i = abiVariant.types.indexOf(variantValue.key);
-        if (i < 0)
-        {
-            throw new SerializeError("type " + variantValue.key + " is not valid for variant");
+        String kvKey = "";
+        Object kvValue;
+        if(value instanceof LinkedTreeMap){
+
+            LinkedTreeMap<String, Object> variantValue = (LinkedTreeMap<String, Object>) value;
+            kvKey = (String)variantValue.get("key");
+            kvValue = variantValue.get("value");
+
+            int i = abiVariant.types.indexOf(kvKey);
+            if (i < 0) {
+                throw new SerializeError("type " + kvKey + " is not valid for variant");
+            }
+            ws.WriteVarUint32(i);
+            WriteAbiType(ws, kvValue, kvKey, abi, isBinaryExtensionAllowed);
+
+        }else {
+
+            ZSWAPIV1.KVPair<String, Object> variantValue = (ZSWAPIV1.KVPair<String, Object>) value;
+            int i = abiVariant.types.indexOf(variantValue.key);
+            if (i < 0) {
+                throw new SerializeError("type " + variantValue.key + " is not valid for variant");
+            }
+            ws.WriteVarUint32(i);
+            WriteAbiType(ws, variantValue.value, variantValue.key, abi, isBinaryExtensionAllowed);
         }
-        ws.WriteVarUint32(i);
-        WriteAbiType(ws, variantValue.value, variantValue.key, abi, isBinaryExtensionAllowed);
     }
 
     private String UnwrapTypeDef(ZSWAPIV1.Abi abi, String type)
     {
         ZSWAPIV1.AbiType wtype = SerializationHelper.firstOrDefaultNewTypeName(abi.types, type);
 
+        if(type.equals("ATTRIBUTE_MAP")){
+            System.out.println("wtype: "+wtype);
+        }
                 //abi.types.FirstOrDefault(t => t.new_type_name == type);
-        if(wtype != null && wtype.type.equals(type))
+        if(wtype != null && !wtype.type.equals(type))
         {
             return UnwrapTypeDef(abi, wtype.type);
         }

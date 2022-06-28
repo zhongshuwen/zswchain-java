@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.zhongshuwen.zswjava.abitypes.ZSWAPIV1;
 import org.zhongshuwen.zswjava.models.rpcProvider.request.*;
 import org.zhongshuwen.zswjava.models.rpcProvider.response.*;
+import org.zhongshuwen.zswjava.utilities.ZSWTableRowResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
@@ -184,13 +185,13 @@ public interface IZswChainRpcProviderApi {
 
     /**
      * Retrofit POST call to "chain/get_table_rows" to an ZSWCHAIN blockchain.
-     * This method gets called from {@link ZswChainRpcProviderImpl#getTableRows(RequestBody)}
+     * This method gets called from {@link ZswChainRpcProviderImpl#getTableRows(GetTableRowsRequest)}
      *
      * @param requestBody the request body to call 'get_table_rows' API
-     * @return Executable {@link Call} to return {@link ResponseBody} of 'get_table_rows' API
+     * @return Executable {@link Call} to return {@link GetTableRowsRequest} of 'get_table_rows' API
      */
     @POST("v1/chain/get_table_rows")
-    Call<ResponseBody> getTableRows(@Body RequestBody requestBody);
+    Call<ResponseBody> getTableRows(@Body GetTableRowsRequest requestBody);
 
     /**
      * Retrofit POST call to "chain/get_kv_table_rows" to an ZSWCHAIN blockchain.

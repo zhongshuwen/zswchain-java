@@ -304,12 +304,12 @@ public class ZSWWriteStream  {
 
     public void WritePublicKey(String value) throws Exception {
         bb.put((byte)GetKeyType(value));
-        bb.put(CryptoHelper.PubKeyStringToBytes(value));
+        bb.put(CryptoHelper.PubKeyStringToBytesNoChecksum(value));
     }
 
     public void WritePrivateKey(String value) throws Exception {
         bb.put((byte)GetKeyType(value));
-        bb.put(CryptoHelper.PrivKeyStringToBytes(value));
+        bb.put(CryptoHelper.PrivKeyStringToBytesNoChecksum(value));
     }
 
     public void WriteSignature(String value) throws Exception {
