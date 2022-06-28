@@ -9,10 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.zhongshuwen.zswjava.error.ErrorConstants;
 import org.zhongshuwen.zswjava.error.abiProvider.GetAbiError;
-import org.zhongshuwen.zswjava.error.rpcProvider.GetBlockInfoRpcError;
-import org.zhongshuwen.zswjava.error.rpcProvider.GetInfoRpcError;
-import org.zhongshuwen.zswjava.error.rpcProvider.GetRequiredKeysRpcError;
-import org.zhongshuwen.zswjava.error.rpcProvider.SendTransactionRpcError;
+import org.zhongshuwen.zswjava.error.rpcProvider.*;
 import org.zhongshuwen.zswjava.error.serializationProvider.DeserializeTransactionError;
 import org.zhongshuwen.zswjava.error.serializationProvider.SerializeError;
 import org.zhongshuwen.zswjava.error.serializationProvider.SerializePackedTransactionError;
@@ -51,6 +48,7 @@ import org.zhongshuwen.zswjava.models.rpcProvider.Transaction;
 import org.zhongshuwen.zswjava.models.rpcProvider.ContextFreeData;
 import org.zhongshuwen.zswjava.models.rpcProvider.TransactionConfig;
 import org.zhongshuwen.zswjava.models.rpcProvider.request.GetBlockInfoRequest;
+import org.zhongshuwen.zswjava.models.rpcProvider.request.GetBlockRequest;
 import org.zhongshuwen.zswjava.models.rpcProvider.request.GetRequiredKeysRequest;
 import org.zhongshuwen.zswjava.models.rpcProvider.request.SendTransactionRequest;
 import org.zhongshuwen.zswjava.models.rpcProvider.response.*;
@@ -393,11 +391,11 @@ public class TransactionProcessor {
             }
         }
 
-        GetBlockInfoResponse getBlockInfoResponse;
+        GetBlockResponse getBlockInfoResponse;
         try {
             getBlockInfoResponse = this.rpcProvider
-                    .getBlockInfo(new GetBlockInfoRequest(taposBlockNum));
-        } catch (GetBlockInfoRpcError getBlockInfoRpcError) {
+                    .getBlock(new GetBlockRequest(taposBlockNum.toString()));
+        } catch (GetBlockRpcError getBlockInfoRpcError) {
             throw new TransactionPrepareRpcError(
                     ErrorConstants.TRANSACTION_PROCESSOR_PREPARE_RPC_GET_BLOCK_INFO, getBlockInfoRpcError);
         }

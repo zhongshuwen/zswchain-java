@@ -1074,7 +1074,7 @@ public class ZSWFormatter {
      * @throws Base58ManipulationError it private key encoding fails.
      */
     @NotNull
-    private static String encodePrivateKey(@NotNull byte[] pemKey,
+    public static String encodePrivateKey(@NotNull byte[] pemKey,
                                           @NotNull AlgorithmEmployed keyType) throws Base58ManipulationError {
         byte[] checkSum;
         String base58Key = "";

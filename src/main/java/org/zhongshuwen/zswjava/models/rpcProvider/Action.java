@@ -1,5 +1,8 @@
 package org.zhongshuwen.zswjava.models.rpcProvider;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSerializer;
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
@@ -53,6 +56,7 @@ public class Action implements Serializable {
      * Action return value after transaction processing.
      */
     private transient Object returnValue;
+    private static Gson gson;
 
     /**
      * Instantiates a new action.
@@ -72,7 +76,16 @@ public class Action implements Serializable {
         this.data = data;
         this.isContextFree = isContextFree;
     }
+    public static Action fromSerializable(@NotNull String account, @NotNull String name,
+                                          @NotNull List<Authorization> authorization, @NotNull Serializable data){
+        if(gson == null){
+            gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'hh:mm:ss zzz")
+                    .disableHtmlEscaping().create();
+        }
+        String jsonData =gson.toJson(data);
+        return new Action(account, name, authorization, jsonData);
 
+    }
     public Action(@NotNull String account, @NotNull String name,
             @NotNull List<Authorization> authorization, @NotNull String data) {
         this(account, name, authorization, data, false);

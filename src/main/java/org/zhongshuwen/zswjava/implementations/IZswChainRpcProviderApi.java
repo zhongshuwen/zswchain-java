@@ -5,6 +5,8 @@ package org.zhongshuwen.zswjava.implementations;
 
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import org.jetbrains.annotations.NotNull;
+import org.zhongshuwen.zswjava.abitypes.ZSWAPIV1;
 import org.zhongshuwen.zswjava.models.rpcProvider.request.*;
 import org.zhongshuwen.zswjava.models.rpcProvider.response.*;
 import retrofit2.Call;
@@ -46,7 +48,6 @@ public interface IZswChainRpcProviderApi {
      */
     @POST("v1/chain/get_block_info")
     Call<GetBlockInfoResponse> getBlockInfo(@Body GetBlockInfoRequest getBlockInfoRequest);
-
     /**
      * Retrofit POST call to "chain/get_raw_abi" to an ZSWCHAIN blockchain.
      * This method gets called from {@link ZswChainRpcProviderImpl#getRawAbi(GetRawAbiRequest)} to get serialized ABI of a smart contract in the request.
@@ -56,6 +57,16 @@ public interface IZswChainRpcProviderApi {
      */
     @POST("v1/chain/get_raw_abi")
     Call<GetRawAbiResponse> getRawAbi(@Body GetRawAbiRequest getRawAbiRequest);
+
+    /**
+     * Retrofit POST call to "chain/get_abi" to an ZSWCHAIN blockchain.
+     * This method gets called fromZswChainRpcProviderImpl#getAbi(RequestBody)
+     *
+     * @param requestBody the request body to call 'get_abi' API
+     * @return Executable {@link Call} to return {@link ZSWAPIV1.Abi} of 'get_abi' API
+     */
+    @POST("v1/chain/get_abi")
+    Call<ZSWAPIV1.Abi> getAbi(@Body GetRawAbiRequest requestBody);
 
     /**
      * Retrofit POST call to "chain/get_required_keys" to an ZSWCHAIN blockchain.
@@ -120,16 +131,6 @@ public interface IZswChainRpcProviderApi {
      */
     @POST("v1/chain/get_block_header_state")
     Call<ResponseBody> getBlockHeaderState(@Body RequestBody requestBody);
-
-    /**
-     * Retrofit POST call to "chain/get_abi" to an ZSWCHAIN blockchain.
-     * This method gets called from {@link ZswChainRpcProviderImpl#getAbi(RequestBody)}
-     *
-     * @param requestBody the request body to call 'get_abi' API
-     * @return Executable {@link Call} to return {@link ResponseBody} of 'get_abi' API
-     */
-    @POST("v1/chain/get_abi")
-    Call<ResponseBody> getAbi(@Body RequestBody requestBody);
 
     /**
      * Retrofit POST call to "chain/get_currency_balance" to an ZSWCHAIN blockchain.

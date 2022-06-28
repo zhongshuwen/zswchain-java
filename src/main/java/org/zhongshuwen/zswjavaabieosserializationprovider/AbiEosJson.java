@@ -361,7 +361,500 @@ public class AbiEosJson {
                 "        }\n" +
                 "    ]\n" +
                 "}");
-
+        jsonMap.put("abi.abi.json","{\n" +
+                "    \"version\": \"eosio::abi/1.1\",\n" +
+                        "    \"structs\": [\n"+
+                "\n" +
+                "  {\n" +
+                "    \"name\": \"extended_asset\",\n" +
+                "    \"base\": \"\",\n" +
+                "    \"fields\": [\n" +
+                "      {\n" +
+                "        \"name\": \"quantity\",\n" +
+                "        \"type\": \"asset\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"contract\",\n" +
+                "        \"type\": \"name\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"name\": \"extensions_entry\",\n" +
+                "    \"base\": \"\",\n" +
+                "    \"fields\": [\n" +
+                "      {\n" +
+                "        \"name\": \"tag\",\n" +
+                "        \"type\": \"uint16\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"value\",\n" +
+                "        \"type\": \"bytes\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"name\": \"type_def\",\n" +
+                "    \"base\": \"\",\n" +
+                "    \"fields\": [\n" +
+                "      {\n" +
+                "        \"name\": \"new_type_name\",\n" +
+                "        \"type\": \"string\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"type\",\n" +
+                "        \"type\": \"string\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"name\": \"field_def\",\n" +
+                "    \"base\": \"\",\n" +
+                "    \"fields\": [\n" +
+                "      {\n" +
+                "        \"name\": \"name\",\n" +
+                "        \"type\": \"string\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"type\",\n" +
+                "        \"type\": \"string\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"name\": \"struct_def\",\n" +
+                "    \"base\": \"\",\n" +
+                "    \"fields\": [\n" +
+                "      {\n" +
+                "        \"name\": \"name\",\n" +
+                "        \"type\": \"string\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"base\",\n" +
+                "        \"type\": \"string\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"fields\",\n" +
+                "        \"type\": \"field_def[]\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"name\": \"action_def\",\n" +
+                "    \"base\": \"\",\n" +
+                "    \"fields\": [\n" +
+                "      {\n" +
+                "        \"name\": \"name\",\n" +
+                "        \"type\": \"name\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"type\",\n" +
+                "        \"type\": \"string\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"ricardian_contract\",\n" +
+                "        \"type\": \"string\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"name\": \"table_def\",\n" +
+                "    \"base\": \"\",\n" +
+                "    \"fields\": [\n" +
+                "      {\n" +
+                "        \"name\": \"name\",\n" +
+                "        \"type\": \"name\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"index_type\",\n" +
+                "        \"type\": \"string\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"key_names\",\n" +
+                "        \"type\": \"string[]\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"key_types\",\n" +
+                "        \"type\": \"string[]\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"type\",\n" +
+                "        \"type\": \"string\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"name\": \"clause_pair\",\n" +
+                "    \"base\": \"\",\n" +
+                "    \"fields\": [\n" +
+                "      {\n" +
+                "        \"name\": \"id\",\n" +
+                "        \"type\": \"string\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"body\",\n" +
+                "        \"type\": \"string\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"name\": \"error_message\",\n" +
+                "    \"base\": \"\",\n" +
+                "    \"fields\": [\n" +
+                "      {\n" +
+                "        \"name\": \"error_code\",\n" +
+                "        \"type\": \"uint64\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"error_msg\",\n" +
+                "        \"type\": \"string\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"name\": \"variant_def\",\n" +
+                "    \"base\": \"\",\n" +
+                "    \"fields\": [\n" +
+                "      {\n" +
+                "        \"name\": \"name\",\n" +
+                "        \"type\": \"string\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"types\",\n" +
+                "        \"type\": \"string[]\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"name\": \"action_result\",\n" +
+                "    \"base\": \"\",\n" +
+                "    \"fields\": [\n" +
+                "      {\n" +
+                "        \"name\": \"name\",\n" +
+                "        \"type\": \"name\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"result_type\",\n" +
+                "        \"type\": \"string\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"name\": \"primary_key_index_def\",\n" +
+                "    \"base\": \"\",\n" +
+                "    \"fields\": [\n" +
+                "      {\n" +
+                "        \"name\": \"name\",\n" +
+                "        \"type\": \"name\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"type\",\n" +
+                "        \"type\": \"string\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"name\": \"secondary_index_def\",\n" +
+                "    \"base\": \"\",\n" +
+                "    \"fields\": [\n" +
+                "      {\n" +
+                "        \"name\": \"type\",\n" +
+                "        \"type\": \"string\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"name\": \"secondary_indices\",\n" +
+                "    \"base\": \"\",\n" +
+                "    \"fields\": [\n" +
+                "      {\n" +
+                "        \"name\": \"name\",\n" +
+                "        \"type\": \"name\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"secondary_index_def\",\n" +
+                "        \"type\": \"secondary_index_def\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"name\": \"kv_table_entry_def\",\n" +
+                "    \"base\": \"\",\n" +
+                "    \"fields\": [\n" +
+                "      {\n" +
+                "        \"name\": \"type\",\n" +
+                "        \"type\": \"string\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"primary_index\",\n" +
+                "        \"type\": \"primary_key_index_def\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"secondary_indices\",\n" +
+                "        \"type\": \"secondary_indices\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"name\": \"kv_table\",\n" +
+                "    \"base\": \"\",\n" +
+                "    \"fields\": [\n" +
+                "      {\n" +
+                "        \"name\": \"name\",\n" +
+                "        \"type\": \"name\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"kv_table_entry_def\",\n" +
+                "        \"type\": \"kv_table_entry_def\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"name\": \"abi_def\",\n" +
+                "    \"base\": \"\",\n" +
+                "    \"fields\": [\n" +
+                "      {\n" +
+                "        \"name\": \"version\",\n" +
+                "        \"type\": \"string\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"types\",\n" +
+                "        \"type\": \"type_def[]\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"structs\",\n" +
+                "        \"type\": \"struct_def[]\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"actions\",\n" +
+                "        \"type\": \"action_def[]\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"tables\",\n" +
+                "        \"type\": \"table_def[]\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"ricardian_clauses\",\n" +
+                "        \"type\": \"clause_pair[]\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"error_messages\",\n" +
+                "        \"type\": \"error_message[]\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"abi_extensions\",\n" +
+                "        \"type\": \"extensions_entry[]\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"variants\",\n" +
+                "        \"type\": \"variant_def[]$\"\n" +
+                "      }\n" +
+                /*
+                "      {\n" +
+                "        \"name\": \"action_results\",\n" +
+                "        \"type\": \"action_result[]$\"\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"kv_tables\",\n" +
+                "        \"type\": \"kv_table$\"\n" +
+                "      }\n" +*/
+                "    ]\n" +
+                "  }"+
+                "    ]\n" +
+                        "}");
+        jsonMap.put("abiold.abi.json","{\n" +
+                "    \"version\": \"eosio::abi/1.1\",\n" +
+                "    \"structs\": [\n" +
+                "        {\n" +
+                "            \"name\": \"extensions_entry\",\n" +
+                "            \"base\": \"\",\n" +
+                "            \"fields\": [\n" +
+                "                {\n" +
+                "                    \"name\": \"tag\",\n" +
+                "                    \"type\": \"uint16\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"name\": \"value\",\n" +
+                "                    \"type\": \"bytes\"\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"name\": \"type_def\",\n" +
+                "            \"base\": \"\",\n" +
+                "            \"fields\": [\n" +
+                "                {\n" +
+                "                    \"name\": \"new_type_name\",\n" +
+                "                    \"type\": \"string\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"name\": \"type\",\n" +
+                "                    \"type\": \"string\"\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"name\": \"field_def\",\n" +
+                "            \"base\": \"\",\n" +
+                "            \"fields\": [\n" +
+                "                {\n" +
+                "                    \"name\": \"name\",\n" +
+                "                    \"type\": \"string\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"name\": \"type\",\n" +
+                "                    \"type\": \"string\"\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"name\": \"struct_def\",\n" +
+                "            \"base\": \"\",\n" +
+                "            \"fields\": [\n" +
+                "                {\n" +
+                "                    \"name\": \"name\",\n" +
+                "                    \"type\": \"string\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"name\": \"base\",\n" +
+                "                    \"type\": \"string\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"name\": \"fields\",\n" +
+                "                    \"type\": \"field_def[]\"\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"name\": \"action_def\",\n" +
+                "            \"base\": \"\",\n" +
+                "            \"fields\": [\n" +
+                "                {\n" +
+                "                    \"name\": \"name\",\n" +
+                "                    \"type\": \"name\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"name\": \"type\",\n" +
+                "                    \"type\": \"string\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"name\": \"ricardian_contract\",\n" +
+                "                    \"type\": \"string\"\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"name\": \"table_def\",\n" +
+                "            \"base\": \"\",\n" +
+                "            \"fields\": [\n" +
+                "                {\n" +
+                "                    \"name\": \"name\",\n" +
+                "                    \"type\": \"name\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"name\": \"index_type\",\n" +
+                "                    \"type\": \"string\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"name\": \"key_names\",\n" +
+                "                    \"type\": \"string[]\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"name\": \"key_types\",\n" +
+                "                    \"type\": \"string[]\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"name\": \"type\",\n" +
+                "                    \"type\": \"string\"\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"name\": \"clause_pair\",\n" +
+                "            \"base\": \"\",\n" +
+                "            \"fields\": [\n" +
+                "                {\n" +
+                "                    \"name\": \"id\",\n" +
+                "                    \"type\": \"string\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"name\": \"body\",\n" +
+                "                    \"type\": \"string\"\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"name\": \"error_message\",\n" +
+                "            \"base\": \"\",\n" +
+                "            \"fields\": [\n" +
+                "                {\n" +
+                "                    \"name\": \"error_code\",\n" +
+                "                    \"type\": \"uint64\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"name\": \"error_msg\",\n" +
+                "                    \"type\": \"string\"\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"name\": \"variant_def\",\n" +
+                "            \"base\": \"\",\n" +
+                "            \"fields\": [\n" +
+                "                {\n" +
+                "                    \"name\": \"name\",\n" +
+                "                    \"type\": \"string\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"name\": \"types\",\n" +
+                "                    \"type\": \"string[]\"\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"name\": \"abi_def\",\n" +
+                "            \"base\": \"\",\n" +
+                "            \"fields\": [\n" +
+                "                {\n" +
+                "                    \"name\": \"version\",\n" +
+                "                    \"type\": \"string\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"name\": \"types\",\n" +
+                "                    \"type\": \"type_def[]\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"name\": \"structs\",\n" +
+                "                    \"type\": \"struct_def[]\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"name\": \"actions\",\n" +
+                "                    \"type\": \"action_def[]\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"name\": \"tables\",\n" +
+                "                    \"type\": \"table_def[]\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"name\": \"ricardian_clauses\",\n" +
+                "                    \"type\": \"clause_pair[]\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"name\": \"error_messages\",\n" +
+                "                    \"type\": \"error_message[]\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"name\": \"abi_extensions\",\n" +
+                "                    \"type\": \"extensions_entry[]\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"name\": \"variants\",\n" +
+                "                    \"type\": \"variant_def[]$\"\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        }\n" +
+                "    ]\n" +
+                "}");
         return Collections.unmodifiableMap(jsonMap);
     }
 

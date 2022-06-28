@@ -1,20 +1,9 @@
 package org.zhongshuwen.zswjava.interfaces;
 
-import org.zhongshuwen.zswjava.error.rpcProvider.GetBlockInfoRpcError;
-import org.zhongshuwen.zswjava.error.rpcProvider.GetInfoRpcError;
-import org.zhongshuwen.zswjava.error.rpcProvider.GetRawAbiRpcError;
-import org.zhongshuwen.zswjava.error.rpcProvider.GetRequiredKeysRpcError;
-import org.zhongshuwen.zswjava.error.rpcProvider.SendTransactionRpcError;
-import org.zhongshuwen.zswjava.models.rpcProvider.request.GetBlockInfoRequest;
-import org.zhongshuwen.zswjava.models.rpcProvider.request.GetRawAbiRequest;
-import org.zhongshuwen.zswjava.models.rpcProvider.request.GetRequiredKeysRequest;
-import org.zhongshuwen.zswjava.models.rpcProvider.request.SendTransactionRequest;
+import org.zhongshuwen.zswjava.error.rpcProvider.*;
+import org.zhongshuwen.zswjava.models.rpcProvider.request.*;
 
-import org.zhongshuwen.zswjava.models.rpcProvider.response.GetBlockInfoResponse;
-import org.zhongshuwen.zswjava.models.rpcProvider.response.GetInfoResponse;
-import org.zhongshuwen.zswjava.models.rpcProvider.response.GetRawAbiResponse;
-import org.zhongshuwen.zswjava.models.rpcProvider.response.GetRequiredKeysResponse;
-import org.zhongshuwen.zswjava.models.rpcProvider.response.SendTransactionResponse;
+import org.zhongshuwen.zswjava.models.rpcProvider.response.*;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -42,6 +31,17 @@ public interface IRPCProvider {
      */
     @NotNull
     GetBlockInfoResponse getBlockInfo(GetBlockInfoRequest getBlockInfoRequest) throws GetBlockInfoRpcError;
+
+    /**
+     * Returns an object containing various details about a specific block on the blockchain.
+     *
+     * @param getBlockRequest Info of a specific block.
+     * @return the info/status of a specific block in the request
+     * @throws GetBlockInfoRpcError thrown if there are any exceptions/backend error during the
+     * getBlockInfo() process.
+     */
+    @NotNull
+    GetBlockResponse getBlock(GetBlockRequest getBlockRequest) throws GetBlockRpcError;
 
     /**
      * Gets raw abi for a given contract.

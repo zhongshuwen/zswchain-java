@@ -1,5 +1,8 @@
 package org.zz.gmhelper;
 
+import org.bouncycastle.jce.ECNamedCurveTable;
+import org.bouncycastle.jce.spec.ECParameterSpec;
+import org.bouncycastle.jce.spec.ECPrivateKeySpec;
 import org.zhongshuwen.zswjava.enums.AlgorithmEmployed;
 import org.zhongshuwen.zswjava.error.utilities.Base58ManipulationError;
 import org.zhongshuwen.zswjava.error.utilities.PEMProcessorError;
@@ -32,13 +35,10 @@ import org.bouncycastle.math.ec.custom.gm.SM2P256V1Curve;
 
 import java.io.IOException;
 import java.math.BigInteger;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.KeyPair;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.security.SecureRandom;
+import java.security.*;
 import java.security.spec.ECFieldFp;
 import java.security.spec.EllipticCurve;
+import java.security.spec.InvalidKeySpecException;
 
 public class SM2Util extends GMBaseUtil {
     /**
@@ -116,10 +116,15 @@ public class SM2Util extends GMBaseUtil {
      * @param dBytes raw d big number bytes
      * @return Returns BCECPrivateKey private key
      */
-    public static BCECPrivateKey getBCECPrivateKeyFromRawD(byte[] dBytes) {
-        ECPrivateKeyParameters privKeyParams = BCECUtil.createECPrivateKeyParameters(dBytes, SM2Util.DOMAIN_PARAMS);
-        return new BCECPrivateKey("EC", privKeyParams, BouncyCastleProvider.CONFIGURATION);
-    }
+    public static BCECPrivateKey getBCECPrivateKeyFromRawD(byte[] dBytes) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeySpecException {
+
+
+        ECParameterSpec params = ECNamedCurveTable.getParameterSpec("sm2p256v1");
+        ECPrivateKeySpec prvkey = new ECPrivateKeySpec(new BigInteger(1, dBytes), params);
+        KeyFactory kf = KeyFactory.getInstance("EC", "BC");
+        return (BCECPrivateKey) kf.generatePrivate(prvkey);
+
+        }
     public static String convertPrivateKeyRawDToZSWPublicKey(byte[] dBytes) throws org.zhongshuwen.zswjava.error.utilities.Base58ManipulationError{
 
         BigInteger privateKeyBI = new BigInteger(BIG_INTEGER_POSITIVE, dBytes);
@@ -509,6 +514,7 @@ public class SM2Util extends GMBaseUtil {
     public static byte[] sign(ECPrivateKeyParameters priKeyParameters, byte[] withId, byte[] srcData)
             throws CryptoException {
         SM2Signer signer = new SM2Signer();
+
         CipherParameters param = null;
         ParametersWithRandom pwr = new ParametersWithRandom(priKeyParameters, new SecureRandom());
         if (withId != null) {
@@ -519,6 +525,26 @@ public class SM2Util extends GMBaseUtil {
         signer.init(true, param);
         signer.update(srcData, 0, srcData.length);
         return signer.generateSignature();
+    }
+    /**
+     * 签名
+     *
+     * @param priKeyParameters 私钥
+     * @param digest          源数据
+     * @return DER编码后的签名值
+     * @throws CryptoException
+     */
+    public static byte[] signDigest(ECPrivateKeyParameters priKeyParameters, byte[] digest)
+            throws CryptoException {
+        SM2PreprocessSigner signer = new SM2PreprocessSigner();
+
+        CipherParameters param = null;
+        ParametersWithRandom pwr = new ParametersWithRandom(priKeyParameters, new SecureRandom());
+
+        param = pwr;
+        signer.init(true, param);
+
+        return signer.generateSignature(digest);
     }
 
     /**

@@ -2,6 +2,7 @@ package org.zhongshuwen.zswjava.implementations;
 
 import com.google.gson.Gson;
 
+import org.zhongshuwen.zswjava.abitypes.ZSWAPIV1;
 import org.zhongshuwen.zswjava.error.rpcProvider.GetBlockInfoRpcError;
 import org.zhongshuwen.zswjava.error.rpcProvider.GetBlockRpcError;
 import org.zhongshuwen.zswjava.error.rpcProvider.GetInfoRpcError;
@@ -33,7 +34,7 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
-import org.zhongshuwen.zswjava.interfaces.IRPCProvider;
+import org.zhongshuwen.zswjava.interfaces.IRPCProviderExtended;
 import org.zhongshuwen.zswjava.error.ZswChainJavaRpcErrorConstants;
 import org.zhongshuwen.zswjava.error.ZswChainJavaRpcProviderCallError;
 import org.zhongshuwen.zswjava.error.ZswChainJavaRpcProviderInitializerError;
@@ -51,7 +52,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * The calls are implemented synchronously.  It is assumed that the developer will
  * wrap them in asynchronous semantics such as AsyncTask in normal use...
  */
-public class ZswChainRpcProviderImpl implements IRPCProvider {
+public class ZswChainRpcProviderImpl implements IRPCProviderExtended {
 
     @NotNull
     private String baseURL;
@@ -157,6 +158,7 @@ public class ZswChainRpcProviderImpl implements IRPCProvider {
      * @return GetBlockRsponse on successful return.
      * @throws GetBlockRpcError Thrown if any errors occur calling or processing the request.
      */
+    @Override
     public @NotNull GetBlockResponse getBlock(GetBlockRequest getBlockRequest)
             throws GetBlockRpcError {
         try {
@@ -307,20 +309,23 @@ public class ZswChainRpcProviderImpl implements IRPCProvider {
         }
     }
 
+
+
     /**
-     * Issue a getAbi() call to the blockchain and process the response.
-     * @param requestBody request body of get_abi API
-     * @return String content of ResponseBody on successful return.
-     * @throws RpcProviderError Thrown if any errors occur calling or processing the request.
+     * Issue a getRawAbi() request to the blockchain and process the response.
+     * @param getAbiRequest Info about a specific smart contract.
+     * @return GetRawAbiResponse on successful return.
+     * @throws GetRawAbiRpcError Thrown if any errors occur calling or processing the request.
      */
-    public @NotNull String getAbi(RequestBody requestBody) throws RpcProviderError {
+    @Override
+    public @NotNull ZSWAPIV1.Abi getAbi(GetRawAbiRequest getAbiRequest)
+            throws GetRawAbiRpcError {
         try {
-            Call<ResponseBody> syncCall = this.rpcProviderApi.getAbi(requestBody);
-            try(ResponseBody responseBody = processCall(syncCall)) {
-                return responseBody.string();
-            }
+            Call<ZSWAPIV1.Abi> syncCall = this.rpcProviderApi.getAbi(getAbiRequest);
+            return processCall(syncCall);
         } catch (Exception ex) {
-            throw new RpcProviderError(ZswChainJavaRpcErrorConstants.RPC_PROVIDER_ERROR_GET_ABI, ex);
+            throw new GetRawAbiRpcError(ZswChainJavaRpcErrorConstants.RPC_PROVIDER_ERROR_GETTING_RAW_ABI,
+                    ex);
         }
     }
 

@@ -81,7 +81,16 @@ public class NegativeTransactionProcessorTest {
         this.session = new TransactionSession(this.mockedSerializationProvider, this.mockedRpcProvider, this.mockedABIProvider,
                 this.mockedSignatureProvider);
     }
+    //region negative tests for "prepare"
+    @Test
+    public void prepare_thenFailWithEmptyActions() throws TransactionPrepareError {
+        exceptionRule.expect(TransactionPrepareInputError.class);
+        exceptionRule.expectMessage(ErrorConstants.TRANSACTION_PROCESSOR_ACTIONS_EMPTY_ERROR_MSG);
+        TransactionProcessor processor = session.getTransactionProcessor();
+        processor.prepare(new ArrayList<Action>());
+    }
 
+/*
     //region negative tests for "prepare"
     @Test
     public void prepare_thenFailWithEmptyActions() throws TransactionPrepareError {
@@ -670,4 +679,6 @@ public class NegativeTransactionProcessorTest {
             + "        \"Key1\"\n"
             + "    ]\n"
             + "}";
+
+ */
 }

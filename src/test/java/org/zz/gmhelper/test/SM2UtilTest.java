@@ -172,7 +172,31 @@ public class SM2UtilTest extends GMBaseTest {
             byte[] withId = ByteUtils.fromHexString("31323334353637383132333435363738");
 
             ECPrivateKeyParameters priKey = new ECPrivateKeyParameters(
-                new BigInteger(ByteUtils.fromHexString(priHex)), SM2Util.DOMAIN_PARAMS);
+                    new BigInteger(ByteUtils.fromHexString(priHex)), SM2Util.DOMAIN_PARAMS);
+            ECPublicKeyParameters pubKey = BCECUtil.createECPublicKeyParameters(xHex, yHex, SM2Util.CURVE, SM2Util.DOMAIN_PARAMS);
+
+            if (!SM2Util.verify(pubKey, src, signBytes)) {
+                Assert.fail("verify failed");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Assert.fail();
+        }
+    }
+    @Test
+    public void testSM2KeyRecovery2() {
+        try {
+            String priHex = "5DD701828C424B84C5D56770ECF7C4FE882E654CAC53C7CC89A66B1709068B9D";
+            String xHex = "FF6712D3A7FC0D1B9E01FF471A87EA87525E47C7775039D19304E554DEFE0913";
+            String yHex = "F632025F692776D4C13470ECA36AC85D560E794E1BCCF53D82C015988E0EB956";
+            String encodedPubHex = "04FF6712D3A7FC0D1B9E01FF471A87EA87525E47C7775039D19304E554DEFE0913F632025F692776D4C13470ECA36AC85D560E794E1BCCF53D82C015988E0EB956";
+            String signHex = "30450220213C6CD6EBD6A4D5C2D0AB38E29D441836D1457A8118D34864C247D727831962022100D9248480342AC8513CCDF0F89A2250DC8F6EB4F2471E144E9A812E0AF497F801";
+            byte[] signBytes = ByteUtils.fromHexString(signHex);
+            byte[] src = ByteUtils.fromHexString("0102030405060708010203040506070801020304050607080102030405060708");
+            byte[] withId = ByteUtils.fromHexString("31323334353637383132333435363738");
+
+            ECPrivateKeyParameters priKey = new ECPrivateKeyParameters(
+                    new BigInteger(ByteUtils.fromHexString(priHex)), SM2Util.DOMAIN_PARAMS);
             ECPublicKeyParameters pubKey = BCECUtil.createECPublicKeyParameters(xHex, yHex, SM2Util.CURVE, SM2Util.DOMAIN_PARAMS);
 
             if (!SM2Util.verify(pubKey, src, signBytes)) {

@@ -34,6 +34,9 @@ import org.zz.gmhelper.cert.SM2PrivateKey;
 
 import java.math.BigInteger;
 import java.rmi.server.ExportException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.*;
 
 /**
@@ -82,7 +85,7 @@ public class SoftSM2KeySignatureProviderImpl implements ISignatureProvider {
         if (privateKey.isEmpty()) {
             throw new ImportKeyError(SoftKeySignatureErrorConstants.IMPORT_KEY_INPUT_EMPTY_ERROR);
         }
-        if(privateKey.substring(0,7)!="PUB_GM_"){
+        if(!privateKey.substring(0,7).equals("PVT_GM_")){
             throw new ImportKeyError(ErrorConstants.UNSUPPORTED_ALGORITHM);
         }
         try {
@@ -139,11 +142,11 @@ public class SoftSM2KeySignatureProviderImpl implements ISignatureProvider {
                     String signatureWithCheckSum =
                             Base58.encode(ZSWFormatter.addCheckSumToSignature(
                                     SM2Formatter.combineSignatureParts(
-                                            SM2Util.sign(
-                                                    SM2Util.getBCECPrivateKeyFromRawD(rawD),
+                                            ZSWFormatter.decodePublicKey(requestKey.substring(7), "PUB_GM_"),
+                                            SM2Util.signDigest(
+                                                    BCECUtil.convertPrivateKeyToParameters(SM2Util.getBCECPrivateKeyFromRawD(rawD)),
                                                     hashedMessage
-                                            ),
-                                            ZSWFormatter.decodePublicKey(requestKey.substring(7), "PUB_GM_")
+                                            )
                                     ),
 
                                     "GM".getBytes()
@@ -153,6 +156,12 @@ public class SoftSM2KeySignatureProviderImpl implements ISignatureProvider {
                     throw new SignTransactionError(error);
                 } catch (Base58ManipulationError error) {
                     throw new SignTransactionError(error);
+                } catch (NoSuchAlgorithmException e) {
+                    throw new SignTransactionError(e);
+                } catch (InvalidKeySpecException e) {
+                    throw new SignTransactionError(e);
+                } catch (NoSuchProviderException e) {
+                    throw new SignTransactionError(e);
                 }
             }
         }
