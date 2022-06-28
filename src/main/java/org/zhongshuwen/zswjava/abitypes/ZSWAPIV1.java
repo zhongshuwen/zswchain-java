@@ -136,7 +136,6 @@ public class ZSWAPIV1 {
         //@NotNull
         public List<AbiField> fields;
         public AbiStruct(){
-            System.out.println("hi");
         }
     }
     

@@ -443,11 +443,6 @@ public byte[] SerializeStruct(Object base, String structTypeName, ZSWAPIV1.Abi a
     private String UnwrapTypeDef(ZSWAPIV1.Abi abi, String type)
     {
         ZSWAPIV1.AbiType wtype = SerializationHelper.firstOrDefaultNewTypeName(abi.types, type);
-
-        if(type.equals("ATTRIBUTE_MAP")){
-            System.out.println("wtype: "+wtype);
-        }
-                //abi.types.FirstOrDefault(t => t.new_type_name == type);
         if(wtype != null && !wtype.type.equals(type))
         {
             return UnwrapTypeDef(abi, wtype.type);
