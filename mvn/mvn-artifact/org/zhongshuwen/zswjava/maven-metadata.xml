@@ -3,11 +3,12 @@
   <groupId>org.zhongshuwen</groupId>
   <artifactId>zswjava</artifactId>
   <versioning>
-    <release>1.3.2</release>
+    <release>1.3.3</release>
     <versions>
       <version>1.3.1</version>
       <version>1.3.2</version>
+      <version>1.3.3</version>
     </versions>
-    <lastUpdated>20220629095922</lastUpdated>
+    <lastUpdated>20220629115840</lastUpdated>
   </versioning>
 </metadata>
