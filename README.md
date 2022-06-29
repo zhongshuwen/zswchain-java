@@ -1,7 +1,7 @@
 # zswchain-java
 中数文联盟链Java SDK
 
-## Maven使用：
+## 使用Maven：
 
 ### 1. 加中数文的maven repo：
 ```
