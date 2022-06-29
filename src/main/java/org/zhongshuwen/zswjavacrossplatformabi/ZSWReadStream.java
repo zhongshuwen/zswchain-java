@@ -14,6 +14,7 @@ import org.zz.gmhelper.BCECUtil;
 import org.zz.gmhelper.SM2Util;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 
 public class ZSWReadStream {
@@ -55,7 +56,7 @@ public class ZSWReadStream {
 
     public Object ReadUint64()
     {
-        return (bb.getLong()&0xffffffffffffffffL);
+        return bb.getLong();//(bb.getLong()&0xffffffffffffffffL);
     }
 
     public Object ReadInt128()
@@ -79,12 +80,12 @@ public class ZSWReadStream {
         while (true)
         {
             long b = (long)(bb.get());
-            v |= (long)((b & 0x7f) << bit);
+            v |= (long)((b & 0x7fL) << (long)bit);
             bit += 7;
-            if ((b & 0x80) == 0)
+            if ((b & 0x80L) == 0L)
                 break;
         }
-        return v >> 0;
+        return v >> 0L;
     }
 
     public Object ReadVarInt32()
@@ -101,10 +102,24 @@ public class ZSWReadStream {
     {
         return bb.getFloat();
     }
+    public Object ReadFloat32LE()
+    {
+        ByteOrder bo = bb.order();
+        float v = bb.order(ByteOrder.LITTLE_ENDIAN).getFloat();
+        bb.order(bo);
+        return v;
+    }
 
     public Object ReadFloat64()
     {
         return bb.getDouble();
+    }
+    public Object ReadFloat64LE()
+    {
+        ByteOrder bo = bb.order();
+        double v = bb.order(ByteOrder.LITTLE_ENDIAN).getDouble();
+        bb.order(bo);
+        return v;
     }
     public String ReadHexString(int numberOfBytes) {
         byte[] bytes = new byte[numberOfBytes];
